@@ -1,0 +1,63 @@
+{
+  "name": "weapp-fetch",
+  "version": "0.1.0",
+  "description": "fetch implementation for weapp",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "test": "yarn lint  && jest --forceExit .",
+    "build": "yarn test && NODE_ENV=production rollup -c --compact"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/xixilive/weapp-fetch.git"
+  },
+  "keywords": [
+    "weapp",
+    "fetch"
+  ],
+  "author": "xixilive@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xixilive/weapp-fetch/issues"
+  },
+  "homepage": "https://github.com/xixilive/weapp-fetch#readme",
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
+    "@babel/preset-env": "^7.9.5",
+    "@rollup/plugin-commonjs": "^11.1.0",
+    "@rollup/plugin-node-resolve": "^7.1.3",
+    "babel-jest": "^25.4.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-jest": "^23.8.2",
+    "jest-cli": "^25.4.0",
+    "rollup": "^2.6.1",
+    "rollup-plugin-babel": "^4.4.0"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-runtime",
+        {}
+      ]
+    ]
+  },
+  "jest": {
+    "automock": false,
+    "bail": true,
+    "roots": [
+      "<rootDir>/__tests__/"
+    ],
+    "testRegex": ".spec.js$",
+    "unmockedModulePathPatterns": [
+      "/node_modules/"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  }
+}
