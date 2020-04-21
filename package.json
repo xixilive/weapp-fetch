@@ -1,19 +1,21 @@
 {
   "name": "weapp-fetch",
   "version": "0.1.0",
-  "description": "fetch implementation for weapp",
-  "main": "index.js",
+  "description": "A fetch-like API for wechat mini-program",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",
     "test": "yarn lint  && jest --forceExit .",
-    "build": "yarn test && NODE_ENV=production rollup -c --compact"
+    "build": "yarn test && NODE_ENV=production rollup -c --compact",
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/xixilive/weapp-fetch.git"
   },
   "keywords": [
-    "weapp",
+    "微信",
+    "微信小程序",
     "fetch"
   ],
   "author": "xixilive@gmail.com",
@@ -35,14 +37,18 @@
     "rollup": "^2.6.1",
     "rollup-plugin-babel": "^4.4.0"
   },
+  "browserslist": [
+    "> 1%, last 2 versions"
+  ],
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      [
+        "@babel/preset-env"
+      ]
     ],
     "plugins": [
       [
-        "@babel/plugin-transform-runtime",
-        {}
+        "@babel/plugin-transform-runtime"
       ]
     ]
   },
