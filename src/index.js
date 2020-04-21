@@ -1,8 +1,8 @@
+import fetch from './fetch'
 import http from './http'
 import Logger from './logger'
 
-export {default as fetch} from './fetch'
-
+export default fetch
 export {
   http, Logger
 }

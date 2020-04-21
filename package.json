@@ -1,6 +1,6 @@
 {
   "name": "weapp-fetch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A fetch-like API for wechat mini-program",
   "main": "dist/index.js",
   "scripts": {
