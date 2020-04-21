@@ -1,5 +1,12 @@
 # A fetch-like API for wechat mini-program
 
+![Travis](https://img.shields.io/travis/xixilive/weapp-fetch/master.svg)
+![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/weapp-fetch.svg)
+![npm](https://img.shields.io/npm/dt/weapp-fetch.svg)
+![NpmVersion](https://img.shields.io/npm/v/weapp-fetch.svg)
+[![Known Vulnerabilities](https://snyk.io/test/github/xixilive/weapp-fetch/badge.svg)](https://snyk.io/test/github/xixilive/weapp-fetch)
+![NpmLicense](https://img.shields.io/npm/l/weapp-fetch.svg)
+
 ## Install
 
 ```
@@ -28,12 +35,14 @@ import {http, Logger} from 'weapp-fetch'
 
 http.logger = new Logger(console, 'debug')
 
+// interpolate request
 http.before = (params) => {
   params.someKey = 'someValue'
 }
 
-http.after = (params) => {
-  params.someKey = 'someValue'
+// interpolate response
+http.after = (res) => {
+  res.someKey = 'someValue'
 }
 
 const client = http('https://example.com')
