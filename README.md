@@ -1,16 +1,16 @@
 # A fetch-like API for wechat mini-program
 
-![Travis](https://img.shields.io/travis/xixilive/weapp-fetch/master.svg)
-![npm bundle size (minified + gzip)](https://img.shields.io/bundlephobia/minzip/weapp-fetch.svg)
-![npm](https://img.shields.io/npm/dt/weapp-fetch.svg)
-![NpmVersion](https://img.shields.io/npm/v/weapp-fetch.svg)
-[![Known Vulnerabilities](https://snyk.io/test/github/xixilive/weapp-fetch/badge.svg)](https://snyk.io/test/github/xixilive/weapp-fetch)
-![NpmLicense](https://img.shields.io/npm/l/weapp-fetch.svg)
+![Travis (.org) branch](https://img.shields.io/travis/xixilive/weapp-fetch/master)
+![npm bundle size](https://img.shields.io/bundlephobia/min/@xixilive/weapp-fetch)
+![npm (scoped)](https://img.shields.io/npm/v/@xixilive/weapp-fetch)
+![Known Vulnerabilities](https://snyk.io/test/github/xixilive/weapp-fetch/badge.svg)
+![NPM](https://img.shields.io/npm/l/@xixilive/weapp-fetch)
 
-## Install
+## Installation
 
-```
-npm i weapp-fetch
+```sh
+# 小程序开发者工具构建npm包时仅处理production依赖,因此要加`--save-prod`
+npm i @xixilive/weapp-fetch --save-prod
 ```
 
 ## Usage
@@ -20,10 +20,9 @@ npm i weapp-fetch
 A simple example of use fetch function, see `API` section in document for details.
 
 ```js
-import fetch from 'weapp-fetch'
+import fetch from '@xixilive/weapp-fetch'
 
-fetch('http://example.com')
-  .then(res => console.log(res))
+fetch('http://example.com').then(res => console.log(res))
 ```
 
 ### use http
@@ -31,7 +30,7 @@ fetch('http://example.com')
 It exposes a http wrapper for `wx.request`.
 
 ```js
-import {http, Logger} from 'weapp-fetch'
+import {http, Logger} from '@xixilive/weapp-fetch'
 
 http.logger = new Logger(console, 'debug')
 
@@ -60,7 +59,7 @@ client.delete('/api').then(console.log)
 > by default, http.logger will log nothing, see `API` section for details.
 
 ```js
-import fetch, {http, Logger} from 'weapp-fetch'
+import fetch, {http, Logger} from '@xixilive/weapp-fetch'
 
 // use wx RealtimeLogManager
 const realtimeTransport = wx.getRealtimeLogManager()
@@ -77,6 +76,12 @@ http.logger = new Logger(consoleTransport, 'debug')
 // ...
 // will process logging during fetch/http requests
 ```
+
+## Build Tips
+
+This package was prebuilt as es module to `dist` folder, and all of source code not be transpiled to ES5 version.
+If you use this package's default build, you should turn on the `ES6 to ES5` option in devtools.
+If you want a custom build, please clone this repo.
 
 ## API
 
@@ -156,3 +161,6 @@ enum LoggerLevel {
 - Does not support FormData
 - Does not support Blob
 - Does not support abort yet
+
+
+

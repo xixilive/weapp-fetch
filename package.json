@@ -1,11 +1,11 @@
 {
-  "name": "weapp-fetch",
-  "version": "0.1.1",
+  "name": "@xixilive/weapp-fetch",
+  "version": "0.1.2",
   "description": "A fetch-like API for wechat mini-program",
   "main": "dist/index.js",
   "scripts": {
     "lint": "eslint src",
-    "test": "yarn lint  && jest --forceExit .",
+    "test": "yarn lint  && jest --forceExit --detectOpenHandles",
     "build": "yarn test && NODE_ENV=production rollup -c --compact",
     "prepublishOnly": "yarn build"
   },
@@ -34,8 +34,11 @@
     "eslint": "^6.8.0",
     "eslint-plugin-jest": "^23.8.2",
     "jest-cli": "^25.4.0",
-    "rollup": "^2.6.1",
-    "rollup-plugin-babel": "^4.4.0"
+    "rollup": "^2.6.1"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   },
   "browserslist": [
     "> 1%, last 2 versions"
