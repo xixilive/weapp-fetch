@@ -2,7 +2,7 @@
 import Logger from './logger'
 import {pick} from './utils'
 
-const interpolators = {
+const interceptors = {
   request: null,
   response: null
 }
@@ -23,12 +23,12 @@ const request = (options) => {
   httpLogger.debug('start request with params: ', params)
   httpLogger.info(`${params.method.toUpperCase()} ${params.url}`)
 
-  if('function' === typeof interpolators.request) {
+  if('function' === typeof interceptors.request) {
     try{
-      httpLogger.info('try to interpolate request')
-      interpolators.request(params)
+      httpLogger.info('try to intercept request')
+      interceptors.request(params)
     }catch(ex){
-      httpLogger.warn('interpolate request raise error: ', ex)
+      httpLogger.warn('intercept request raise error: ', ex)
       return Promise.reject(httpError(ex))
     }
   }
@@ -45,12 +45,12 @@ const request = (options) => {
           return reject(httpError(res, `response status: ${res.statusCode}`))
         }
 
-        if('function' === typeof interpolators.response) {
+        if('function' === typeof interceptors.response) {
           try{
-            httpLogger.info('try to interpolate response')
-            interpolators.response(res, params)
+            httpLogger.info('try to intercept response')
+            interceptors.response(res, params)
           }catch(ex){
-            httpLogger.warn('interpolate response raise error: ', ex)
+            httpLogger.warn('intercept response raise error: ', ex)
             return reject(httpError(ex))
           }
         }
@@ -141,10 +141,10 @@ Object.defineProperty(http, 'before', {
   configurable: false,
   enumerable: false,
   get() {
-    return interpolators.request
+    return interceptors.request
   },
   set(fn) {
-    interpolators.request = fn
+    interceptors.request = fn
   }
 })
 
@@ -152,10 +152,10 @@ Object.defineProperty(http, 'after', {
   configurable: false,
   enumerable: false,
   get() {
-    return interpolators.response
+    return interceptors.response
   },
   set(fn) {
-    interpolators.response = fn
+    interceptors.response = fn
   }
 })
 

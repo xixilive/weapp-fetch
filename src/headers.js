@@ -34,7 +34,7 @@ Headers.prototype.get = function(name) {
 }
 
 Headers.prototype.has = function(name) {
-  return hasOwnProp.call(this.map, normalizeName(name))
+  return hasOwnProp(this.map, normalizeName(name))
 }
 
 Headers.prototype.set = function(name, value) {
@@ -43,7 +43,7 @@ Headers.prototype.set = function(name, value) {
 
 Headers.prototype.forEach = function(callback, thisArg) {
   for (const name in this.map) {
-    if (hasOwnProp.call(this.map, name)) {
+    if (hasOwnProp(this.map, name)) {
       callback.call(thisArg, this.map[name], name, this)
     }
   }

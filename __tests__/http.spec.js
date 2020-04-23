@@ -1,17 +1,7 @@
 import HTTP from '../src/http'
+import {buildRequest} from './helper'
 
 global.wx = {}
-const buildResponse = (ok, body = '') => ({
-  header:{}, 
-  statusCode: ok ? 200 : 400, 
-  errMsg: ok ? 'OK' : '400',
-  body
-})
-
-const buildRequest = (ok = true) => jest.fn(({success, fail, ...args}) => {
-  const res = buildRequest.lastResponse = buildResponse(ok)
-  ok ? success(res) : fail(res)
-})
 
 const expectReqParams = (options) => {
   const args = {
@@ -72,7 +62,7 @@ describe('HTTP', () => {
     it('DELETE', expectHttpMethod('delete'))
   })
 
-  describe('interpolators', () => {
+  describe('interceptors', () => {
     beforeEach(() => {
       wx.request = buildRequest(true)
       HTTP.before = jest.fn((params) => params)
@@ -80,10 +70,8 @@ describe('HTTP', () => {
     })
 
     afterEach(() => {
-      HTTP.interpolators = {
-        request: null,
-        response: null
-      }
+      HTTP.before = null
+      HTTP.after = null
     })
 
     it('should be called', async () => {

@@ -40,4 +40,10 @@ describe('logger', () => {
     logger.log('foo', 'bar')
     expect(transport.log).toBeCalledWith('foo', 'bar')
   })
+
+  it('should output prefix', () => {
+    let logger = Logger(transport, 'warn', '[PREFIX] ')
+    logger.warn('foo', 'bar')
+    expect(transport.warn).toBeCalledWith('[PREFIX] ', 'foo', 'bar')
+  })
 })

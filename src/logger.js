@@ -5,18 +5,19 @@ function log(levelName, levelNum, ...message) {
   if(this.level < levelNum) {
     return
   }
+  const args = this.prefix ? [`${this.prefix}`] : []
   if(isFn(this.transport[levelName])) {
-    this.transport[levelName](...message)
+    this.transport[levelName](...args.concat(message))
   } else {
-    this.log(levelName, ...message)
+    this.log(...args.concat([levelName], message))
   }
 }
 
 const levelNames = ['debug', 'info', 'warn', 'error']
 
-function Logger(transport, level = Logger.levels.DEBUG) {
+function Logger(transport, level = Logger.levels.DEBUG, prefix = null) {
   if(!(this instanceof Logger)) {
-    return new Logger(transport, level);
+    return new Logger(transport, level, prefix);
   }
   
   if(!transport || !isFn(transport.log)) {
@@ -30,10 +31,12 @@ function Logger(transport, level = Logger.levels.DEBUG) {
 
   this.transport = transport
   this.level = level
+  this.prefix = 'string' === typeof prefix ? prefix : null
 }
 
 Logger.prototype.log = function(level, ...message) {
-  this.transport.log(level, ...message)
+  const args = this.prefix ? [`${this.prefix}`, level, ...message]: [level, ...message]
+  this.transport.log(...args)
   return this
 }
 

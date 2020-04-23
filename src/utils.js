@@ -4,7 +4,7 @@ export function hasOwnProp(o, prop) {
 
 export const pick = (obj, ...keys) => {
   return keys.reduce((memo, key) => {
-    if(hasOwnProp(obj, key) && typeof obj[key] !== 'undefined') {
+    if(hasOwnProp(obj, key)) {
       memo[key] = obj[key];
     }
     return memo;
@@ -52,7 +52,7 @@ export function bufferClone(buf) {
   }
 }
 
-const methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT'];
+const methods = ['DELETE', 'GET', 'HEAD', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'CONNECT', 'TRACE'];
 export function normalizeMethod(method) {
   const upcased = method.toUpperCase()
   return methods.indexOf(upcased) > -1 ? upcased : method

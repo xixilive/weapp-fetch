@@ -34,12 +34,12 @@ import {http, Logger} from '@xixilive/weapp-fetch'
 
 http.logger = new Logger(console, 'debug')
 
-// interpolate request
+// intercept request
 http.before = (params) => {
   params.someKey = 'someValue'
 }
 
-// interpolate response
+// intercept response
 http.after = (res) => {
   res.someKey = 'someValue'
 }
